@@ -1,16 +1,18 @@
 <nav class='d-flex align-items-center justify-content-center p-2 bg-dark'>
   <ul class="m-0">
     <li>
-      
-      <form action="{{ route('login') }}" method="GET">
-        @method('GET')
-        @csrf
-        <button>Login</button>
-      </form>
       @if(auth()->check())
-      
-      <a class="text-light text-decoration-none text-primary text-lg" href="{{ route('logout') }}">Logout</a>
-      
+        <li>
+          <h4>Bienvenido {{auth()->user()->name}}</h4>
+        </li>
+        <form action="{{ route('login') }}" method="GET">
+          @method('GET')
+          @csrf
+          <button>Login</button>
+        </form>
+        <li>
+          <a class="text-light text-decoration-none text-primary text-lg" href="{{ route('logout') }}">Logout</a>
+        </li>
       @endif
     </li>
   </ul>
