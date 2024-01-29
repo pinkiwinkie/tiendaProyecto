@@ -13,6 +13,11 @@
         <li>
           <a class="text-light text-decoration-none text-primary text-lg" href="{{ route('logout') }}">Logout</a>
         </li>
+        @if(auth()->user()->rol=="admin")
+        <li>
+          <a class="text-light text-decoration-none text-primary text-lg" href="{{ route('user.index') }}">Crud</a>
+        </li>
+        @endif
       @endif
     </li>
   </ul>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,9 @@ Route::group(["middleware" => "auth"], function () {
   Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });
 
+Route::group(["middleware" => "roles:admin"], function () {
+  Route::resource('user', UserController::class);
+});
 
 
 Route::get('login', [LoginController::class, 'loginForm'])->name('login');
