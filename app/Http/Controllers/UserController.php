@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserRequest2;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,16 @@ class UserController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(UserRequest2 $request)
   {
-    //
+    $user = new User();
+    $user->name = $request->get('name');
+    $user->surname = $request->get('surname');
+    $user->email = $request->get('email');
+    $user->password = bcrypt($request->get('pwd'));
+    $user->rol = $request->get('rol');
+    $user->save();
+    return redirect()->route('user.index');
   }
 
   /**
@@ -88,6 +96,8 @@ class UserController extends Controller
    */
   public function destroy($id)
   {
-    //
+    $user = User::findOrFail($id);
+    $user->delete();
+    return redirect()->route('user.index');
   }
 }
