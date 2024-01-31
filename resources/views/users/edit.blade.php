@@ -6,11 +6,10 @@
     @method('PUT')
     <div class="form-group">
         <label for="email">Email:</label>
-        <input type="text" class="form-control" name="email" value="{{$user->email}}"
-        id="email">
-        @if ($errors->has('titulo'))
+        <input type="text" class="form-control" name="email" value="{{$user->email}}" id="email">
+        @if ($errors->has('email'))
         <div class="text-danger">
-        {{ $errors->first('titulo') }}
+        {{ $errors->first('email') }}
         </div>
         @endif
 

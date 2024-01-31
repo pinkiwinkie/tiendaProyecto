@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -69,9 +70,14 @@ class UserController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id)
+  public function update(UserRequest $request, $id)
   {
-    
+    $user = User::findOrFail($id);
+    $user->email = $request->get('email');
+    $user->rol = $request->get('rol');
+    $user->save();
+    $users = User::get();
+    return view('users.crud', compact('users'));
   }
 
   /**
