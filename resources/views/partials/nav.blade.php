@@ -8,7 +8,7 @@
       </li>
       @endif
       <li class="nav-item">
-        <a href="#" class="text-light text-decoration-none text-primary text-lg">
+        <a href="{{ route('cart.show', auth()->user()->id) }}" class="text-light text-decoration-none text-primary text-lg">
           <i class="bi bi-cart-fill"></i>
         </a>
       </li>

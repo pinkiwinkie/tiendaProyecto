@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -20,12 +21,12 @@ Route::group(["middleware" => "auth"], function () {
   Route::get('/', [ProductController::class, 'index'])->name("home");
 
   Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+  Route::resource('cart', CartController::class);
 });
 
 Route::group(["middleware" => "roles:admin"], function () {
   Route::resource('user', UserController::class);
 });
-
 
 Route::get('login', [LoginController::class, 'loginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
