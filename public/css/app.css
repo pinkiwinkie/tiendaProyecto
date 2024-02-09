@@ -11977,6 +11977,10 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+body {
+  min-width: 100%;
+}
+
 nav {
   width: 100%;
   display: flex;
@@ -11994,4 +11998,12 @@ nav ul {
   justify-content: space-around;
   align-items: center;
   font-size: 20px;
+}
+
+.titleCart {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 1%;
+  font-weight: bold;
 }

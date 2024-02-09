@@ -36,7 +36,8 @@ class CartController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    //añadir producto 
+    //llamar vista del carrito
   }
 
   /**
@@ -56,7 +57,6 @@ class CartController extends Controller
         $products[] = $product;
       }
   }
-    //var_dump($products);
     return view('cart.cart', compact('products'));
   }
 

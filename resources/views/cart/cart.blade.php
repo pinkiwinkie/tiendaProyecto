@@ -11,6 +11,7 @@
         <th>Nombre</th>
         <th>Cantidad</th>
         <th>Precio</th>
+        <th>Acciones</th>
       </tr>
       @forelse($products as $product)
         <tr>
@@ -29,8 +30,15 @@
           </form>
           </td>
           <td>{{$product->price}}€</td>
+          <td>
+            <form action="" method="post">
+              @csrf
+              @method('DELETE')
+              <input type="submit" class="btn btn-danger" value="Borrar" />
+            </form>
+          </td>
         </tr>
-
+        @empty
       @endforelse
     </table>
   @endif

@@ -2,6 +2,9 @@
   @if(auth()->check())
     <h4>Bienvenido {{auth()->user()->name}}</h4>
     <ul class="">
+      <li class="nav-item">
+        <a class="text-light text-decoration-none text-primary text-lg" href="{{ route('home') }}">Inicio</a>
+      </li>
       @if(auth()->user()->rol=="admin")
       <li class="nav-item">
         <a class="text-light text-decoration-none text-primary text-lg" href="{{ route('user.index') }}">Crud</a>

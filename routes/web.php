@@ -22,6 +22,7 @@ Route::group(["middleware" => "auth"], function () {
 
   Route::get('logout', [LoginController::class, 'logout'])->name('logout');
   Route::resource('cart', CartController::class);
+  Route::resource('product', ProductController::class);
 });
 
 Route::group(["middleware" => "roles:admin"], function () {
