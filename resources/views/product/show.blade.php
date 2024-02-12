@@ -14,8 +14,12 @@
           <h5 class="card-title">{{$product->name}}</h5>
           <p class="card-text">{{$product->description}}</p>
           <p class="card-text">{{$product->price}}€</p>
-          <input type="number" class="form-control" name="quantity" value="1" min="1">
-          <a href="{{ route('cart.store', auth()->user()->id) }}" class="btn btn-primary mt-4">Añadir a la cesta</a>
+          <form action="{{ route('cart.store')}}" method="POST">
+            @csrf
+            <input type="number" class="form-control" name="productId" value="{{$product->id}}">
+            <input type="number" class="form-control" name="quantity" value="1" min="1">
+            <button type="submit" class="btn btn-primary mt-4">Añadir a la cesta</button>
+          </form>
         </div>
       </div>
     </div>
