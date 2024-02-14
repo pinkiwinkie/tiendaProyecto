@@ -7,9 +7,10 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
-body{
+body {
   min-width: 100%;
 }
+
 nav {
   width: 100%;
   display: flex;
@@ -29,10 +30,47 @@ nav {
   }
 }
 
-.titleCart{
+.titleCart {
   width: 100%;
   text-align: center;
   text-transform: uppercase;
   margin-top: 1%;
   font-weight: bold;
+}
+
+.container::-webkit-scrollbar {
+  width: 8px;
+  &-thumb {
+    background-color: #888;
+    &:hover {
+      background-color: #555;
+    }
+  }
+}
+
+#cart-container {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #ccc;
+  height: 60%;
+  table {
+    overflow-y: auto;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    white-space: nowrap;
+    tr > th {
+      font-weight: 700;
+      background-color: #c7afcf;
+      color: #fff;
+      border: none;
+      padding: 6px 0;
+    }
+    td{
+      width: 250px;
+      img{
+        max-width: 100%;
+      }
+    }
+  }
 }

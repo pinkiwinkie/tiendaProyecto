@@ -12007,3 +12007,40 @@ nav ul {
   margin-top: 1%;
   font-weight: bold;
 }
+
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+.container::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+.container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+#cart-container {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #ccc;
+  height: 60%;
+}
+#cart-container table {
+  overflow-y: auto;
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+#cart-container table tr > th {
+  font-weight: 700;
+  background-color: #c7afcf;
+  color: #fff;
+  border: none;
+  padding: 6px 0;
+}
+#cart-container table td {
+  width: 250px;
+}
+#cart-container table td img {
+  max-width: 100%;
+}

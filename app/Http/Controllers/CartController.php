@@ -36,15 +36,11 @@ class CartController extends Controller
    */
   public function store(Request $request)
   {
-    //dd($request->all());
-    //añadir producto 
-    //llamar vista del carrito
     $response = Http::withToken("Token1234")->post('http://tiendapi/api/carts', [
       'idProduct' => $request->get('idProduct'),
       'idUser' => auth()->user()->id,
       'quantity' => $request->get('quantity')      
     ]);
-    var_dump($response->body());
     if ($response->successful()) {
       return redirect()->route('cart.show', auth()->user()->id);
     }
@@ -58,7 +54,6 @@ class CartController extends Controller
    */
   public function show($id)
   {
-    //var_dump("hola");
     $response = Http::withToken("Token1234")->get('http://tiendapi/api/carts/' . $id);
     $carts = json_decode($response->body(), true);
     $products = [];
