@@ -36,14 +36,15 @@ class CartController extends Controller
    */
   public function store(Request $request)
   {
+    //dd($request->all());
     //añadir producto 
     //llamar vista del carrito
-    $response = Http::withToken("Token1234")->post('http://tiendapi/api/carts/', [
-      'idProduct' => $request->get('productId'),
-      'quantity' => $request->get('quantity'),
-      'idUser' => auth()->user()->id
+    $response = Http::withToken("Token1234")->post('http://tiendapi/api/carts', [
+      'idProduct' => $request->get('idProduct'),
+      'idUser' => auth()->user()->id,
+      'quantity' => $request->get('quantity')      
     ]);
-    dd($response->body());
+    var_dump($response->body());
     if ($response->successful()) {
       return redirect()->route('cart.show', auth()->user()->id);
     }

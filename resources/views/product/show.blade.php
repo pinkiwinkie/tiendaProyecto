@@ -16,9 +16,9 @@
           <p class="card-text">{{$product->price}}€</p>
           <form action="{{ route('cart.store')}}" method="POST">
             @csrf
-            <input type="number" class="form-control" name="productId" value="{{$product->id}}">
+            <input type="number" class="form-control" name="idProduct" value="{{$product->id}}">
             <input type="number" class="form-control" name="quantity" value="1" min="1">
-            <button type="submit" class="btn btn-primary mt-4">Añadir a la cesta</button>
+            <input type="submit" class="btn btn-primary mt-4"></input>
           </form>
         </div>
       </div>
