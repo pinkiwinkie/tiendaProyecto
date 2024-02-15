@@ -44,9 +44,9 @@
     @endforelse
   </table>
 </div>
-<div class="container my-5 d-flex justify-content-around">
-  <p>Total: {{ $total }}€</p>
-  <a href="" class="btn btn-info">Confirmar pedido</a>
-  <a href="{{ route('home') }}" class="btn btn-success">Seguir comprando</a>
+<div class="container my-5 d-flex justify-content-around align-items-center">
+  <p style="font-size: 1.5em; background: rgb(196, 144, 226); border-radius: 5px">Total: <span><strong>{{ $total }}€</strong></span></p>
+  <a href="" class="btn btn-info d-flex align-items-center">Confirmar pedido</a>
+  <a href="{{ route('home') }}" class="btn btn-success d-flex align-items-center">Seguir comprando</a>
 </div>
 @endsection
