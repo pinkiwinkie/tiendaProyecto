@@ -55,5 +55,19 @@ class ProductsSeeder extends Seeder
     $product->photo = 'sinatra.png';
     $product->price = '50';
     $product->save();
+
+    $product = new Product();
+    $product->name = 'Vinilo Tchaikovsky';
+    $product->description = 'DISCO VINILO ANTIGUO. SWAN LAKE. ANSERMET. L ORCHESTRE DE LA SUISSE ROMANDE. EL LAGO DE LOS CISNES. de TCHAIKOVSKY';
+    $product->photo = 'tchaikovsky.png';
+    $product->price = '89';
+    $product->save();
+
+    $product = new Product();
+    $product->name = 'Vinilo Beethoven';
+    $product->description = 'DISCO VINILO ANTIGUO. Heroic Beethoven. 2 vinilos.';
+    $product->photo = 'beethoven.png';
+    $product->price = '33';
+    $product->save();
   }
 }
