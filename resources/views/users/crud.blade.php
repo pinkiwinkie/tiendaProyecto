@@ -46,10 +46,12 @@
             </div>
           @endif
         </div>
-        <div class="form-group">
+        <div class="form-group mb-4">
           <label for="rol">Rol:</label>
-          <input type="text" class="form-control" name="rol"
-          id="rol" value="{{ old('rol') }}">
+          <select class="form-control" name="rol" id="rol">
+            <option value="admin" {{ old('rol') == 'admin' ? 'selected' : '' }}>Admin</option>
+            <option value="customer" {{ old('rol') == 'customer' ? 'selected' : '' }}>Customer</option>
+          </select>
           @if ($errors->has('rol'))
             <div class="text-danger">
               {{ $errors->first('rol') }}
@@ -57,7 +59,8 @@
           @endif
         </div>
         
-        <input type="submit" name="enviar" value="Enviar"
+        
+        <input class="btn btn-info" type="submit" name="enviar" value="Enviar"
         class="btn btn-dark btn-block">
     </form>
     </div>
@@ -80,7 +83,7 @@
                 </form>
               </a>
             </td>
-            <td><a href="{{route('user.edit', $user->id)}}">Editar</a></td>
+            <td><a class="btn btn-warning" href="{{route('user.edit', $user->id)}}">Editar</a></td>
           </tr>
           @empty
             <p>No hay users</p>

@@ -13,26 +13,26 @@
     </tr>
     @forelse($products as $product)
       <tr>
-        <td><img src="{{ asset('img/'.$product->photo)}}" alt=""></td>
-        <td>{{$product->name}}</td>
+        <td><img src="{{ asset('img/'.$product['photo'])}}" alt=""></td>
+        <td>{{$product['name']}}</td>
         <td>
-          <form action="" method="POST">
+          <form action="{{ route('cart.update', $product['idCart']) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="d-flex justify-content-between align-items-center pe-3">
               <div class="form-group">
                 <label for="cantidad"></label>
-                <input type="text" class="form-control w-75" name="quantity" value="1">
+                <input type="text" class="form-control w-75" name="quantity" value={{$product['quantity']}}>
               </div>
-              <input type="submit" name="enviar" value="Actualizar"
+              <input type="submit" class="btn btn-warning" name="enviar" value="Actualizar"
               class="btn btn-dark btn-block">
             </div>
         </form>
         </td>
-        <td>{{$product->price}}€</td>
-        <td>Hola {{-- Cambiar el controlador por un array asociativo para guardar el producto y su cantidad --}}</td>
+        <td>{{$product['price']}}€</td>
+        <td>{{ $product['price'] * $product['quantity'] }}€</td>
         <td>
-          <form action="" method="post">
+          <form action="{{ route('cart.destroy', $product['idCart']) }}" method="post">
             @csrf
             @method('DELETE')
             <input type="submit" class="btn btn-danger" value="Borrar" />
@@ -40,11 +40,13 @@
         </td>
       </tr>
       @empty
+      <p>El carrito está vacío</p>
     @endforelse
   </table>
 </div>
-<div class="container my-5 d-flex justify-content-end">
-  <p>Total: </p>
-  <button class="btn btn-info">Confirmar pedido</button>
+<div class="container my-5 d-flex justify-content-around">
+  <p>Total: {{ $total }}€</p>
+  <a href="" class="btn btn-info">Confirmar pedido</a>
+  <a href="{{ route('home') }}" class="btn btn-success">Seguir comprando</a>
 </div>
 @endsection

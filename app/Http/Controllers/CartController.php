@@ -39,7 +39,7 @@ class CartController extends Controller
     $response = Http::withToken("Token1234")->post('http://tiendapi/api/carts', [
       'idProduct' => $request->get('idProduct'),
       'idUser' => auth()->user()->id,
-      'quantity' => $request->get('quantity')      
+      'quantity' => $request->get('quantity')
     ]);
     if ($response->successful()) {
       return redirect()->route('cart.show', auth()->user()->id);
@@ -52,20 +52,38 @@ class CartController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
   public function show($id)
   {
-    $response = Http::withToken("Token1234")->get('http://tiendapi/api/carts/' . $id);
+    $idUser = $id;
+    if($idUser != auth()->user()->id){
+      $idUser = auth()->user()->id;
+    }
+    $response = Http::withToken("Token1234")->get('http://tiendapi/api/carts/' . $idUser);
     $carts = json_decode($response->body(), true);
     $products = [];
+
     foreach ($carts as $cart) {
       $product = Product::find($cart['idProduct']);
       if ($product) {
-        $products[] = $product;
-      } 
+        $products[] = [
+          'id' => $product['id'],
+          'name' => $product['name'],
+          'price' => $product['price'],
+          'photo' => $product['photo'],
+          'quantity' => $cart['quantity'],
+          'idCart' => $cart['id']
+        ];
+      }
     }
-    return view('cart.cart', compact('products'));
-  }
 
+    $total = 0;
+    foreach ($products as $product) {
+      $total += $product['price'] * $product['quantity'];
+    }
+
+    return view('cart.cart', compact('products', 'total'));
+  }
 
   /**
    * Show the form for editing the specified resource.
@@ -87,8 +105,22 @@ class CartController extends Controller
    */
   public function update(Request $request, $id)
   {
-    //
+    $quantity = $request->get('quantity');
+
+    $response = Http::withToken("Token1234")->put('http://tiendapi/api/carts/' . $id, [
+      'quantity' => $quantity
+    ]);
+
+    if ($response->successful()) {
+      if ($quantity == 0) {
+        // Si la cantidad es cero, elimina el elemento del carrito directamente
+        return $this->destroy($id);
+      } else {
+        return redirect()->route('cart.show', auth()->user()->id);
+      }
+    }
   }
+
 
   /**
    * Remove the specified resource from storage.
@@ -98,6 +130,9 @@ class CartController extends Controller
    */
   public function destroy($id)
   {
-    //
+    $response = Http::withToken("Token1234")->delete('http://tiendapi/api/carts/' . $id);
+    if ($response->successful()) {
+      return redirect()->route('cart.show', auth()->user()->id);
+    }
   }
 }
