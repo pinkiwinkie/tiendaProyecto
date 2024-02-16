@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ Route::group(["middleware" => "auth"], function () {
   Route::get('logout', [LoginController::class, 'logout'])->name('logout');
   Route::resource('cart', CartController::class);
   Route::resource('product', ProductController::class);
+  Route::resource('order', OrderController::class);
 });
 
 Route::group(["middleware" => "roles:admin"], function () {

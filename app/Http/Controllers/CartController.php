@@ -113,14 +113,12 @@ class CartController extends Controller
 
     if ($response->successful()) {
       if ($quantity == 0) {
-        // Si la cantidad es cero, elimina el elemento del carrito directamente
         return $this->destroy($id);
       } else {
         return redirect()->route('cart.show', auth()->user()->id);
       }
     }
   }
-
 
   /**
    * Remove the specified resource from storage.

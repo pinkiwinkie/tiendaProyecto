@@ -27,9 +27,9 @@
               <input type="submit" class="btn btn-warning" name="enviar" value="Actualizar"
               class="btn btn-dark btn-block">
             </div>
-        </form>
+          </form>
         </td>
-        <td>{{$product['price']}}€</td>
+        <td>{{ $product['price'] }}€</td>
         <td>{{ $product['price'] * $product['quantity'] }}€</td>
         <td>
           <form action="{{ route('cart.destroy', $product['idCart']) }}" method="post">
@@ -46,7 +46,11 @@
 </div>
 <div class="container my-5 d-flex justify-content-around align-items-center">
   <p style="font-size: 1.5em; background: rgb(196, 144, 226); border-radius: 5px">Total: <span><strong>{{ $total }}€</strong></span></p>
-  <a href="" class="btn btn-info d-flex align-items-center">Confirmar pedido</a>
+  <form action="{{ route('order.store') }}" method="post">
+    @csrf
+    <input type="submit" class="btn btn-info d-flex align-items-center" value="Confirmar pedido">
+</form>
+
   <a href="{{ route('home') }}" class="btn btn-success d-flex align-items-center">Seguir comprando</a>
 </div>
 @endsection
