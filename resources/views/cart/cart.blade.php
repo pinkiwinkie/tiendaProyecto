@@ -49,7 +49,7 @@
   <form action="{{ route('order.store') }}" method="post">
     @csrf
     <input type="submit" class="btn btn-info d-flex align-items-center" value="Confirmar pedido">
-</form>
+  </form>
 
   <a href="{{ route('home') }}" class="btn btn-success d-flex align-items-center">Seguir comprando</a>
 </div>

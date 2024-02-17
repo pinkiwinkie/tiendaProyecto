@@ -64,11 +64,12 @@ class OrderController extends Controller
    * @param  \App\Models\Order  $order
    * @return \Illuminate\Http\Response
    */
-  public function show($carts)
+  public function show($userID)
   {
     //error cuando pasas carrito hay que pasar order
     //ver como solucionar o ver como pasar el carrito 
-    return view('order.order', compact('carts'));
+    $orders = Order::where('idUser', $userID)->get();
+    return view('order.order', compact('orders'));
   }
 
 

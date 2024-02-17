@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderLinesTable extends Migration
+class NewFieldUserOrders extends Migration
 {
   /**
    * Run the migrations.
@@ -13,13 +13,8 @@ class CreateOrderLinesTable extends Migration
    */
   public function up()
   {
-    Schema::create('order_lines', function (Blueprint $table) {
-      $table->id();
-      $table->integer("idOrder");
-      $table->integer("nLine");
-      $table->integer("idProduct");
-      $table->integer("quantity");
-      $table->timestamps();
+    Schema::table('orders', function (Blueprint $table) {
+      $table->integer('user_id');
     });
   }
 
@@ -30,6 +25,8 @@ class CreateOrderLinesTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('order_lines');
+    Schema::table('orders', function (Blueprint $table) {
+      $table->dropColumn('user_id');
+    });
   }
 }
