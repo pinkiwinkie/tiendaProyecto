@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderLine;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -55,7 +56,7 @@ class OrderController extends Controller
 
     $response = Http::withToken("Token1234")->delete('http://tiendapi/api/carts/destroy2/' . auth()->user()->id);
 
-    return redirect()->route('order.show', compact('carts'));
+    return redirect()->route('order.show', compact('order'));
   }
 
   /**
@@ -64,15 +65,29 @@ class OrderController extends Controller
    * @param  \App\Models\Order  $order
    * @return \Illuminate\Http\Response
    */
-  public function show($userID)
+  public function show()
   {
-    //error cuando pasas carrito hay que pasar order
-    //ver como solucionar o ver como pasar el carrito 
-    $orders = Order::where('idUser', $userID)->get();
-    return view('order.order', compact('orders'));
+    $latestOrder = Order::where('idUser', auth()->user()->id)
+      ->latest('dateOrder')
+      ->first();
+    $orderLines = OrderLine::where('idOrder', $latestOrder->id)->get();
+    $user = auth()->user();
+
+    $total = 0;
+    $productPrices = [];
+    $productNames = [];
+    foreach ($orderLines as $orderLine) {
+      $product = Product::find($orderLine->idProduct);
+
+      $subtotal = $product->price * $orderLine->quantity;
+
+      $total += $subtotal;
+      $productPrices[$product->id] = $product->price;
+      $productNames[$product->id] = $product->name;
+    }
+
+    return view('order.order', compact('latestOrder', 'orderLines', 'total', 'productPrices', 'user', 'productNames'));
   }
-
-
 
   /**
    * Show the form for editing the specified resource.
