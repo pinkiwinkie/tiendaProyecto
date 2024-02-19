@@ -10,10 +10,16 @@
         <a class="text-light text-decoration-none text-primary text-lg" href="{{ route('user.index') }}">Crud</a>
       </li>
       @endif
-      <li class="nav-item">
+      <li class="nav-item position-relative">
         <a href="{{ route('cart.show', auth()->user()->id) }}" class="text-light text-decoration-none text-primary text-lg">
           <i class="bi bi-cart-fill"></i>
         </a>
+        @php
+          $amountProducts = app('App\Http\Controllers\CartController')->amountCart();
+        @endphp
+        @if ($amountProducts > 0)
+          <div class="cart-badge" style="text-align-center">{{ $amountProducts }}</div>
+        @endif
       </li>
       <li class="nav-item">
         <a class="text-light text-decoration-none text-primary text-lg" href="{{ route('logout') }}">Logout</a>

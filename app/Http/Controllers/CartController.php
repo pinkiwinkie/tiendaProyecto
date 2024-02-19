@@ -56,7 +56,7 @@ class CartController extends Controller
   public function show($id)
   {
     $idUser = $id;
-    if($idUser != auth()->user()->id){
+    if ($idUser != auth()->user()->id) {
       $idUser = auth()->user()->id;
     }
     $response = Http::withToken("Token1234")->get('http://tiendapi/api/carts/' . $idUser);
@@ -131,6 +131,21 @@ class CartController extends Controller
     $response = Http::withToken("Token1234")->delete('http://tiendapi/api/carts/' . $id);
     if ($response->successful()) {
       return redirect()->route('cart.show', auth()->user()->id);
+    }
+  }
+
+  public function amountCart()
+  {
+    $userId = auth()->user()->id;
+    $response = Http::withToken("Token1234")->get('http://tiendapi/api/carts/' . $userId);
+
+    if ($response->successful()) {
+      $cart = $response->json();
+      $totalProducts = 0;
+      foreach ($cart as $product) {
+        $totalProducts += $product['quantity'];
+      }
+      return $totalProducts;
     }
   }
 }
